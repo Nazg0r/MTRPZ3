@@ -10,7 +10,8 @@ COPY . .
 
 RUN CGO_ENABLED=0 go build -ldflags '-extldflags "-static"' -o ./build/fizzbuzz.exe
 
-FROM scratch
+#FROM scratch
+FROM gcr.io/distroless/static-debian11
 
 WORKDIR /usr/src/app
 
