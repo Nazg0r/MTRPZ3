@@ -8,6 +8,7 @@ namespace MarketApi.Controllers
     [Route("api/[controller]/[action]")]
     public class ProductController : ControllerBase
     {
+
         IProductService _productService;
         public ProductController(IProductService productService)
         {
