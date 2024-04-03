@@ -1,18 +1,20 @@
 #FROM --platform=$BUILDPLATFORM  mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+#FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022 AS build
 
 WORKDIR /source
 
 
 COPY ./*.csproj .
-RUN dotnet restore
+RUN dotnet restore --ucr
 
 COPY ./. .
-RUN dotnet publish -c Release -o /out
+RUN dotnet publish --ucr -c Release -o /out
 
 
 #FROM mcr.microsoft.com/dotnet/nightly/aspnet:8.0-jammy-chiseled-composite
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+#FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022
 
 WORKDIR /out
 
